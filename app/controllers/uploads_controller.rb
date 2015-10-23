@@ -5,7 +5,7 @@ class UploadsController < ApplicationController
 		@upload = Upload.new(upload_params)
 		@upload.user_id = current_user.id
 		respond_to do |format|
-      # begin
+      begin
       	@upload.save! 
         if @upload.process
         	format.html { redirect_to root_path, notice: 'Upload was successful and file processed' }
@@ -13,11 +13,10 @@ class UploadsController < ApplicationController
         	format.html { redirect_to root_path, notice: 'Upload was successful. Wrong formatting inside the file'}
         end
 	        # format.json { render action: 'show', status: :created, location: @upload }
-	    # rescue
-        
-     #    format.html { redirect_to root_path, notice: 'Upload not successful. File format not supported. Only csv files are allowed'}
+	    rescue        
+        format.html { redirect_to root_path, notice: 'Upload not successful. File format not supported. Only csv files are allowed'}
 	    #     # format.json { render json: @product.errors, status: :unprocessable_entity }
-	    # end
+	    end
 	  end
 	end
 
