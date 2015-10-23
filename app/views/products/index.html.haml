@@ -2,7 +2,7 @@
   - model_class = Product
   .page-header
     %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-    = form_for "", url: products_path, method: :get do |f|
+    = form_for "", url: get_products_path, method: :get, remote: true do |f|
       %div.col-lg-9
         #datepicker.input-daterange.input-group
           %input.input-sm.form-control{:name => "start", :type => "text"}/
@@ -18,7 +18,7 @@
         %th= model_class.human_attribute_name(:description)
         %th= model_class.human_attribute_name(:manufacturing_date)
         %th=t '.actions', :default => t("helpers.actions")
-    %tbody
+    %tbody#products
       = render partial: "product", collection: @products
 
   = link_to t('.new', :default => t("helpers.links.new")), new_product_path, :class => 'btn btn-primary'

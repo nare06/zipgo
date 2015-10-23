@@ -67,6 +67,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  def get_products
+    @products = Product.where("mfg_date >= ? AND mfg_date < ?", params[:start], params[:end]).to_a
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
