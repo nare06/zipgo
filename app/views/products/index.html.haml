@@ -1,0 +1,36 @@
+.col-lg-9
+  - model_class = Product
+  .page-header
+    %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+    = form_for "", url: products_path, method: :get do |f|
+      %div.col-lg-9
+        #datepicker.input-daterange.input-group
+          %input.input-sm.form-control{:name => "start", :type => "text"}/
+          %span.input-group-addon to
+          %input.input-sm.form-control{:name => "end", :type => "text"}/
+      %div.col-lg-3
+      = f.submit "Get products b/w dates", class: "btn btn-sm btn-primary"
+  %table.table.table-striped
+    %thead
+      %tr
+        %th= model_class.human_attribute_name(:id)
+        %th= model_class.human_attribute_name(:name)
+        %th= model_class.human_attribute_name(:description)
+        %th= model_class.human_attribute_name(:manufacturing_date)
+        %th=t '.actions', :default => t("helpers.actions")
+    %tbody
+      = render partial: "product", collection: @products
+
+  = link_to t('.new', :default => t("helpers.links.new")), new_product_path, :class => 'btn btn-primary'
+.col-lg-3
+  .well.sidebar-nav
+    %h3 Upload File here
+    %ul.nav.nav-list
+      %li.nav-header please sign in to upload files             
+      = render partial: "uploads/upload", locals: { upload: @upload}
+
+
+:javascript
+
+  $('#datepicker').datepicker({});      
+
