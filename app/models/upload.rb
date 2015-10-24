@@ -1,10 +1,8 @@
 class Upload < ActiveRecord::Base
   belongs_to :user
-  has_attached_file :file, content_type: { content_type: "text/csv"}
-  # validates_attachment_content_type :file, content_type: /^.*\.(csv|CSV)$/
-  # validates_attachment_content_type :file,presence: true, content_type: { content_type: %w("application/csv, 
-  # 													application/excel, application/vnd.ms-excel, application/vnd.msexcel,
-  # 													 text/anytext, text/comma-separated-values")}
+  has_attached_file :file
+  validates_attachment_content_type :file, content_type:"text/csv"
+  
   def process
 		begin
 	  	file = File.new(self.file.path, "r")
@@ -35,6 +33,3 @@ class Upload < ActiveRecord::Base
 		end  	    
   end
 end
-
-
-["application/csv, application/excel, application/vnd.ms-excel, application/vnd.msexcel, text/anytext, text/comma-separated-values"]
