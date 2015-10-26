@@ -10,7 +10,7 @@
           %input.input-sm.form-control{:name => "end", :type => "text"}/
       %div.col-lg-3
       = f.submit "Get products b/w dates", class: "btn btn-sm btn-primary"
-  %table.table.table-striped
+  %table.table.table-striped.display.responsive.no-wrap#product_table
     %thead
       %tr
         %th= model_class.human_attribute_name(:id)
@@ -32,5 +32,14 @@
 
 :javascript
 
-  $('#datepicker').datepicker({});      
+  $('#datepicker').datepicker({});
+  $('#product_table').DataTable({
+    responsive: true,
+    aoColumnDefs: [
+     {
+     bSortable: false,
+     aTargets: [ -1 ]
+     }
+    ]
+  });      
 

@@ -50,3 +50,4 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem "paperclip", "3.5"
 gem 'pg'
 gem 'bootstrap-datepicker-rails'
+gem 'jquery-datatables-rails', '~> 3.3.0'
